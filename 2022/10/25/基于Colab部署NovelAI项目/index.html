@@ -1,0 +1,716 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/wbs.jpeg">
+  <link rel="icon" href="/img/wbs.jpeg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="syx">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一、Colab介绍​		在机器学习过程中我们可能需要cuda来使用GPU加速训练网络，但是cuda目前只支持N卡，像我的MBP或者其他显卡又该怎么办呢？ Colab是什么？​		Colab &#x3D; Colaboratory（合作实验室），它是谷歌提供的一个在线工作平台，用户可以直接通过浏览器执行python代码并于他人合作分享。当然最主要的是，他还为我们提供免费的GPU。熟悉深度学习的伙伴应">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Colab部署NovelAI项目">
+<meta property="og:url" content="http://syxcoder.github.io/2022/10/25/%E5%9F%BA%E4%BA%8EColab%E9%83%A8%E7%BD%B2NovelAI%E9%A1%B9%E7%9B%AE/index.html">
+<meta property="og:site_name" content="Welcome to syx&#39;s blog!">
+<meta property="og:description" content="一、Colab介绍​		在机器学习过程中我们可能需要cuda来使用GPU加速训练网络，但是cuda目前只支持N卡，像我的MBP或者其他显卡又该怎么办呢？ Colab是什么？​		Colab &#x3D; Colaboratory（合作实验室），它是谷歌提供的一个在线工作平台，用户可以直接通过浏览器执行python代码并于他人合作分享。当然最主要的是，他还为我们提供免费的GPU。熟悉深度学习的伙伴应">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://syxcoder.github.io/img/colab.jpg">
+<meta property="article:published_time" content="2022-10-25T06:08:47.000Z">
+<meta property="article:modified_time" content="2022-10-25T08:04:08.463Z">
+<meta property="article:author" content="syx">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="colab">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://syxcoder.github.io/img/colab.jpg">
+  
+  
+  
+  <title>基于Colab部署NovelAI项目 - Welcome to syx&#39;s blog!</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"syxcoder.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"RkGEfrXwwGdgobVQrN576yRF-gzGzoHsz","app_key":"wyh5DTTiu0iG1HQy08ybwSoc","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>syx&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="基于Colab部署NovelAI项目"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-10-25 14:08" pubdate>
+          2022年10月25日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          38 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">基于Colab部署NovelAI项目</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="一、Colab介绍"><a href="#一、Colab介绍" class="headerlink" title="一、Colab介绍"></a>一、Colab介绍</h1><p>​		在机器学习过程中我们可能需要cuda来使用GPU加速训练网络，但是cuda目前只支持N卡，像我的MBP或者其他显卡又该怎么办呢？</p>
+<h2 id="Colab是什么？"><a href="#Colab是什么？" class="headerlink" title="Colab是什么？"></a>Colab是什么？</h2><p>​		Colab &#x3D; Colaboratory（合作实验室），它是谷歌提供的一个在线工作平台，用户可以直接通过浏览器执行python代码并于他人合作分享。当然最主要的是，他还为我们提供免费的GPU。熟悉深度学习的伙伴应该知道，CPU计算力高但是核数量少，善于处理线性序列，而GPU计算力低但核数量多，更善于处理并行计算。因此在深度学习中使用GPU计算的速度要远快于CPU，因此有高算力的GPU是深度学习的重要保证。因此Colab最大的优势在于我们可以免费的借用谷歌提供的GPU来进行深度学习。国内也有类似的平台，例如百度的飞浆，但是免费使用时长及性能不及Colab。</p>
+<h2 id="Colab相关的概念"><a href="#Colab相关的概念" class="headerlink" title="Colab相关的概念"></a>Colab相关的概念</h2><p><strong>Jupyter Notebook：</strong> 在Colab中，python代码的执行是基于.ipynb文件，也就是Jupyter Notebook文件格式 的python文件。这种笔记本风格的文件与普通的py文件的区别是它可以分块执行代码并立刻得到代码块的输出（有点像命令行中的python，但是前者可以写一个代码块而命令行是单行执行），同时它还可以很方便的添加注释，这种交互式 的操作十分适合一些轻量级的任务。<a target="_blank" rel="noopener" href="https://jupyter.org/">具体关于Jupyter NoteBook的信息可以点此访问官网。</a></p>
+<p><strong>代码执行程序：</strong>代码执行程序就是Colab在云端的服务器。简单来说，我们现在Notebook写好代码，然后连接到代码执行程序，Colab会在云端执行代码，然后把结果回传给浏览器。</p>
+<p><strong>实例空间：</strong>连接到代码执行程序后，Colab需要为其分配实例空间(Instance)，可以简单理解为为了运行Notebook而创建的“虚拟机”，其中包含了执行ipynb文件时的默认配置、环境变量、自带的库等。</p>
+<p><strong>会话：</strong>当Jupyter Notebook连接到代码执行程序并分配实例空间后，就成为了一个会话(Session)，但是用户能开启的会话是有限的。</p>
+<p>支持通过“**!&lt;command&gt;**”的方式来执行UNIX终端命令，比如“!ls”, “!pip install &lt;package&gt;“等。</p>
+<hr>
+<img src="/2022/10/25/%E5%9F%BA%E4%BA%8EColab%E9%83%A8%E7%BD%B2NovelAI%E9%A1%B9%E7%9B%AE/colab2.jpg" srcset="/img/loading.gif" lazyload class="" title="colab2">
+
+<hr>
+<h1 id="二、部署NovelAI项目"><a href="#二、部署NovelAI项目" class="headerlink" title="二、部署NovelAI项目"></a>二、部署NovelAI项目</h1><h2 id="1、配置环境"><a href="#1、配置环境" class="headerlink" title="1、配置环境"></a>1、配置环境</h2><h3 id="1-1-测试显卡"><a href="#1-1-测试显卡" class="headerlink" title="1.1 测试显卡"></a>1.1 测试显卡</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">!nvidia-smi -L<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-2-Setup-miniconda"><a href="#1-2-Setup-miniconda" class="headerlink" title="1.2 Setup miniconda"></a>1.2 Setup miniconda</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> sys<br>!wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh<br>!chmod +x Miniconda3-latest-Linux-x86_64.sh<br>!bash ./Miniconda3-latest-Linux-x86_64.sh -b -f -p /usr/local<br>sys.path.append(<span class="hljs-string">&#x27;/usr/local/lib/python3.7/site-packages/&#x27;</span>)<br>!rm Miniconda3-latest-Linux-x86_64.sh<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-3-Setup-environment"><a href="#1-3-Setup-environment" class="headerlink" title="1.3 Setup environment"></a>1.3 Setup environment</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">!conda env update -n base -f /content/stable-diffusion/environment.yaml <br></code></pre></td></tr></table></figure>
+
+<h3 id="1-4-Setup-Upscalers-CFPGAN-and-ESRGAN"><a href="#1-4-Setup-Upscalers-CFPGAN-and-ESRGAN" class="headerlink" title="1.4 Setup Upscalers - CFPGAN and ESRGAN"></a>1.4 Setup Upscalers - CFPGAN and ESRGAN</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs python">add_CFP = <span class="hljs-literal">True</span> <span class="hljs-comment">#@param &#123;type:&quot;boolean&quot;&#125; </span><br>add_ESR = <span class="hljs-literal">True</span> <span class="hljs-comment">#@param &#123;type:&quot;boolean&quot;&#125;</span><br>add_LDSR = <span class="hljs-literal">False</span> <span class="hljs-comment">#@param &#123;type:&quot;boolean&quot;&#125; </span><br><span class="hljs-comment">#@markdown ⚠️ LDSR is 1.9GB and make take time to download</span><br><br><span class="hljs-keyword">if</span> add_CFP:<br>  %cd /content/stable-diffusion/src/gfpgan/<br>  !pip install basicsr facexlib yapf lmdb opencv-python pyyaml tb-nightly --no-deps<br>  !python setup.py develop<br>  !pip install realesrgan<br>  !wget https://github.com/TencentARC/GFPGAN/releases/download/v1<span class="hljs-number">.3</span><span class="hljs-number">.0</span>/GFPGANv1<span class="hljs-number">.3</span>.pth -P experiments/pretrained_models<br><span class="hljs-keyword">if</span> add_ESR:<br>  %cd /content/stable-diffusion/src/realesrgan/<br>  !wget https://github.com/xinntao/Real-ESRGAN/releases/download/v0<span class="hljs-number">.1</span><span class="hljs-number">.0</span>/RealESRGAN_x4plus.pth -P experiments/pretrained_models<br>  !wget https://github.com/xinntao/Real-ESRGAN/releases/download/v0<span class="hljs-number">.2</span><span class="hljs-number">.2</span><span class="hljs-number">.4</span>/RealESRGAN_x4plus_anime_6B.pth -P experiments/pretrained_models<br><span class="hljs-keyword">if</span> add_LDSR:<br>  %cd /content/stable-diffusion/src<br>  !git clone https://github.com/devilismyfriend/latent-diffusion<br>  %cd latent-diffusion<br>  %mkdir -p experiments/<br>  %cd experiments/<br>  %mkdir -p pretrained_models<br>  %cd pretrained_models<br>  <span class="hljs-comment">#project.yaml download</span><br>  !wget -O project.yaml https://heibox.uni-heidelberg.de/f/31a76b13ea27482981b4/?dl=<span class="hljs-number">1</span><br>  <span class="hljs-comment">#model.ckpt model download</span><br>  !wget -O model.ckpt https://heibox.uni-heidelberg.de/f/578df07c8fc04ffbadf3/?dl=<span class="hljs-number">1</span><br><br>%cd /content/stable-diffusion/<br>!wget https://github.com/matomo-org/travis-scripts/blob/master/fonts/Arial.ttf?raw=true -O arial.ttf<br></code></pre></td></tr></table></figure>
+
+<h2 id="2、配置NovelAI"><a href="#2、配置NovelAI" class="headerlink" title="2、配置NovelAI"></a>2、配置NovelAI</h2><h3 id="2-1-下载复制文件"><a href="#2-1-下载复制文件" class="headerlink" title="2.1 下载复制文件"></a>2.1 下载复制文件</h3><p>是在github上clone下来的项目，最快也要三五分钟，耐心等待。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python">!sudo apt-get install aria2<br>!sudo apt-get install file<br><br>!mkdir /content/time<br>!git clone https://github.com/pnpnpn/timeout-decorator.git /content/time<br>%cd /content/time<br>!pwd<br>!ls -l<br></code></pre></td></tr></table></figure>
+
+<p>下载NA</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs python">%cd /content/time<br><br><span class="hljs-keyword">import</span> timeout_decorator<br><br><span class="hljs-meta">@timeout_decorator.timeout(<span class="hljs-params"><span class="hljs-number">180</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">downNovelAI</span>():<br>  !rm -rf /content/n2<br>  !mkdir /content/n2<br>  %cd /content/n2<br>  !aria2c <span class="hljs-string">&quot;magnet:?xt=urn:btih:4a4b483d4a5840b6e1fee6b0ca1582c979434e4d&amp;dn=naifu&amp;tr=udp%3a%2f%2ftracker.opentrackr.org%3a1337%2fannounce&quot;</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">checkFile</span>():<br>  !file /content/n2/naifu/models/animefull-final-pruned/model.ckpt&gt;fileinfo<br>  !file /content/n2/naifu/models/animevae.pt&gt;fileinfo2<br>  f1=<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;fileinfo&quot;</span>)<br>  res1=f1.read()<br>  f1.close<br>  f2=<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;fileinfo2&quot;</span>)<br>  res2=f2.read()<br>  f2.close<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Zip&quot;</span> <span class="hljs-keyword">in</span> res1 <span class="hljs-keyword">and</span> <span class="hljs-string">&quot;Zip&quot;</span> <span class="hljs-keyword">in</span> res2<br><br><span class="hljs-keyword">while</span> <span class="hljs-number">1</span>:<br>  <span class="hljs-keyword">try</span>:<br>    downNovelAI()<br>  <span class="hljs-keyword">except</span>:<br>    <span class="hljs-keyword">if</span> checkFile():<br>      <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;下载完成&quot;</span>)<br>      <span class="hljs-keyword">break</span><br>    <span class="hljs-keyword">else</span>:<br>      <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;下载未完成，重试&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>下载WebUI</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">!mkdir /content/novelai<br>%cd /content/novelai<br>!git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui /content/novelai<br>%cd /content/novelai<br>!git checkout -b master<br></code></pre></td></tr></table></figure>
+
+<p>复制训练好的模型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">!cp /content/n2/naifu/models/animefull-final-pruned/model.ckpt /content/novelai/models/Stable-diffusion/<br>!cp /content/n2/naifu/models/animevae.pt /content/novelai/models/Stable-diffusion/model.pt<br><br>!mkdir -p /content/novelai/train_images/raw/<br>!mkdir -p /content/novelai/train_images/des/<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-2-设置登录账号密码"><a href="#2-2-设置登录账号密码" class="headerlink" title="2.2 设置登录账号密码"></a>2.2 设置登录账号密码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#@markdown # 用户名</span><br>user = <span class="hljs-string">&quot;admin&quot;</span> <span class="hljs-comment">#@param&#123;type:&quot;string&quot;&#125;</span><br><span class="hljs-comment">#@markdown # 密码</span><br>pwd = <span class="hljs-string">&quot;123456&quot;</span> <span class="hljs-comment">#@param&#123;type:&quot;string&quot;&#125;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="三、启动！"><a href="#三、启动！" class="headerlink" title="三、启动！"></a>三、启动！</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;用户名=<span class="hljs-subst">&#123;user&#125;</span>, 密码=<span class="hljs-subst">&#123;pwd&#125;</span>&quot;</span>)<br>!python launch.py --share --gradio-auth &#123;user&#125;:&#123;pwd&#125;<br></code></pre></td></tr></table></figure>
+
+<img src="/2022/10/25/%E5%9F%BA%E4%BA%8EColab%E9%83%A8%E7%BD%B2NovelAI%E9%A1%B9%E7%9B%AE/colab.jpg" srcset="/img/loading.gif" lazyload class="" title="colab">
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">#机器学习</a>
+      
+        <a href="/tags/python/">#python</a>
+      
+        <a href="/tags/colab/">#colab</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>基于Colab部署NovelAI项目</div>
+      <div>http://syxcoder.github.io/2022/10/25/基于Colab部署NovelAI项目/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>syx</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年10月25日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/08/21/%E5%85%AB%E6%9C%88%E9%9A%8F%E7%AC%94/" title="八月随笔">
+                        <span class="hidden-mobile">八月随笔</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"RkGEfrXwwGdgobVQrN576yRF-gzGzoHsz","appKey":"wyh5DTTiu0iG1HQy08ybwSoc","path":"window.location.pathname","placeholder":"说点什么……","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
