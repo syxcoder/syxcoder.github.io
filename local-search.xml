@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="/2022/10/25/hello-world/"/>
+    <url>/2022/10/25/hello-world/</url>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>八月随笔</title>
+    <link href="/2022/08/21/%E5%85%AB%E6%9C%88%E9%9A%8F%E7%AC%94/"/>
+    <url>/2022/08/21/%E5%85%AB%E6%9C%88%E9%9A%8F%E7%AC%94/</url>
+    
+    <content type="html"><![CDATA[<img src="/2022/08/21/%E5%85%AB%E6%9C%88%E9%9A%8F%E7%AC%94/sb.jpg" class="" title="informal_essay"><h2 id="校验算法-CRC16"><a href="#校验算法-CRC16" class="headerlink" title="校验算法- CRC16"></a>校验算法- CRC16</h2><h3 id="常见标准"><a href="#常见标准" class="headerlink" title="常见标准"></a>常见标准</h3><blockquote><p> CRC16_CCITT：多项式x16+x12+x5+1（0x1021），初始值0x0000，低位在前，高位在后，结果与0x0000异或<br>CRC16_CCITT_FALSE：多项式x16+x12+x5+1（0x1021），初始值0xFFFF，低位在后，高位在前，结果与0x0000异或<br>CRC16_XMODEM：多项式x16+x12+x5+1（0x1021），初始值0x0000，低位在后，高位在前，结果与0x0000异或<br>CRC16_X25：多项式x16+x12+x5+1（0x1021），初始值0xFFFF，低位在前，高位在后，结果与0xFFFF异或<br>CRC16_MODBUS：多项式x16+x15+x2+1（0x8005），初始值0xFFFF，低位在前，高位在后，结果与0x0000异或<br>CRC16_MAXIM：多项式x16+x15+x2+1（0x8005），初始值0x0000，低位在前，高位在后，结果与0xFFFF异或<br>CRC16_USB：多项式x16+x15+x2+1（0x8005），初始值0xFFFF，低位在前，高位在后，结果与0xFFFF异或<br>CRC16_IBM：多项式x16+x15+x2+1（0x8005），初始值0x0000，低位在前，高位在后，结果与0x0000异或</p></blockquote><hr><h3 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h3><blockquote><p>1.根据CRC16的标准选择初值CRCIn的值。<br>2.将数据的第一个字节与CRCIn高8位异或。<br>3.判断最高位，若该位为 0 左移一位，若为 1 左移一位再与多项式Hex码异或。<br>4.重复3直至8位全部移位计算结束。<br>5.重复将所有输入数据操作完成以上步骤，所得16位数即16位CRC校验码。</p></blockquote><hr><h2 id="关于数据类型"><a href="#关于数据类型" class="headerlink" title="关于数据类型"></a>关于数据类型</h2><blockquote><p>c++内建整型中唯一用到的是int，如果需要不同大小的变量，可以使用&lt;stdint.h&gt;中的精确宽度的整型，如int 6_t。不要使用uint32_t等无符号整数，除非是在表示一个位组(bit pattern)而不是一个人数值。即使数值不会为负值也不要使用无符号类型。</p><p>char有可能是signed，也有可能是unsigned（取决于编译器）</p></blockquote><hr><h2 id="关于C-编码规范"><a href="#关于C-编码规范" class="headerlink" title="关于C++编码规范"></a>关于C++编码规范</h2><blockquote><p>1、所有的头文件都应该使用# define保护，防止被多重包含，格式为<PROJECT><em><PATH></em><FILE><em>H</em><br>    2、使用前置声明尽量减少.h文件中# include的数量，降低编译依赖；能依赖声明的就不要依赖定义。<br>    3、内联函数：当函数不超过10行时，且内部结构不复杂时。对于复杂的内联函数的定义，应该放在-inl.h的头文件中。-inl.h文件还可以用于函数模板的定义（一般用不到）。<br>    4、定义函数时尽量做到输入参数在前，输出参数在后：提高可读性和易维护性。<br>    5、项目内头文件应按照项目源代码目录树结构排列。包含次序：对应的头文件、C系统文件、C++系统文件、其他库头文件、本项目内头文件。<br>    6、允许甚至提倡匿名命名空间，以避免运行时的命名冲突。匿名命名空间的内容无需缩进，空间结束时用注释&#x2F;&#x2F; namespace标识，不能在.h头文件中使用匿名命名空间！<br>    7、最好不要使用using指示符，保证命名空间下的所有名称都可以正常使用，防止污染命名空间。<br>    8、不要将嵌套类定义为public，除非他们是接口的一部分。<br>    非成员函数、静态成员函数和全局函数使用命名空间中的非成员函数或静态成员函数，尽量不要使用全局函数。<br>   9、如果变量是一个 对象，每次进入作用域都要调用其构造函数，每次退出都要调用析构函数，所以这类变量尽量在作用域外声明会更加高效。<br>    10、禁止使用class类型的静态或全局变量。<br>    11、不要使用函数返回值初始化静态变量。<br>    12、不要在多线程代码中使用非 const 的静态变量。<br>    13、构造函数一般进行没什么意义的初始化，有意义的初始化尽量放在Init()函数中。<br>    14、如果类中定义了成员变量而且没有提供其他构造函数，就要自己定义一个默认构造函数。<br>    15、所有单参数构造函数都必须是显式的。在类定义中，将关键字 explicit 加到单参数构造函数前。</p></blockquote><p>未完待续……</p><hr><h2 id="屏蔽SIGPIPE信号"><a href="#屏蔽SIGPIPE信号" class="headerlink" title="屏蔽SIGPIPE信号"></a>屏蔽SIGPIPE信号</h2><blockquote><p>signal(SIGPIPE, SIG_IGN);不要直接通过signal来忽略信号</p><p>可以通过下列方法来屏蔽SIGPIPE信号：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">sigaction</span> sa;<br>sa.sa_handler = SIG_IGN;<span class="hljs-comment">//设定接受到指定信号后的动作为忽略</span><br>sa.sa_flags = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">if</span> (<span class="hljs-built_in">sigemptyset</span>(&amp;sa.sa_mask) == <span class="hljs-number">-1</span> || <span class="hljs-comment">//初始化信号集为空</span><br><span class="hljs-built_in">sigaction</span>(SIGPIPE, &amp;sa, <span class="hljs-number">0</span>) == <span class="hljs-number">-1</span>) <span class="hljs-comment">//屏蔽SIGPIPE信号</span><br>&#123; <br><span class="hljs-built_in">perror</span>(<span class="hljs-string">&quot;failed to ignore SIGPIPE; sigaction&quot;</span>);<br><span class="hljs-built_in">exit</span>(EXIT_FAILURE);<br>&#125;<br></code></pre></td></tr></table></figure></blockquote><hr>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>随笔</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>test</title>
+    <link href="/2022/08/19/test/"/>
+    <url>/2022/08/19/test/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1><img src="/2022/08/19/test/test.jpeg" class="" title="test">]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  
+</search>
