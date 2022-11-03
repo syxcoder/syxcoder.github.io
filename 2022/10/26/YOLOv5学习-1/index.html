@@ -19,11 +19,11 @@
     <meta name="description" content="一、前言YOLO系列应该是目前最热门的目标检测算法了，目前最新版本更新到了YOLOv5。由于YOLOv5太新了，目前TensorFlow2还没稳定，那就用PyTorch框架吧。PyTorch与TensorFlow的区别如下：   TensorFlow：更倾向于工程人员，落地比较好。 PyTorch：比较倾向于研究人员，前沿算法用的比较多。   另外，我用的是Macbook M1Pro，PyTorc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="YOLOv5学习(一)｜部署YOLOv5模型">
-<meta property="og:url" content="http://syxcoder.github.io/2022/10/26/YOLOv5%E5%AD%A6%E4%B9%A0-1/index.html">
+<meta property="og:url" content="http://syxcoder.blog/2022/10/26/YOLOv5%E5%AD%A6%E4%B9%A0-1/index.html">
 <meta property="og:site_name" content="Welcome to syx&#39;s blog!">
 <meta property="og:description" content="一、前言YOLO系列应该是目前最热门的目标检测算法了，目前最新版本更新到了YOLOv5。由于YOLOv5太新了，目前TensorFlow2还没稳定，那就用PyTorch框架吧。PyTorch与TensorFlow的区别如下：   TensorFlow：更倾向于工程人员，落地比较好。 PyTorch：比较倾向于研究人员，前沿算法用的比较多。   另外，我用的是Macbook M1Pro，PyTorc">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://syxcoder.github.io/img/yolov5_1.png">
+<meta property="og:image" content="http://syxcoder.blog/img/yolov5_1.png">
 <meta property="article:published_time" content="2022-10-26T07:10:11.000Z">
 <meta property="article:modified_time" content="2022-10-27T03:41:58.849Z">
 <meta property="article:author" content="syx">
@@ -31,7 +31,7 @@
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="机器学习">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://syxcoder.github.io/img/yolov5_1.png">
+<meta name="twitter:image" content="http://syxcoder.blog/img/yolov5_1.png">
   
   
   
@@ -73,7 +73,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"syxcoder.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"RkGEfrXwwGdgobVQrN576yRF-gzGzoHsz","app_key":"wyh5DTTiu0iG1HQy08ybwSoc","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"syxcoder.blog","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"RkGEfrXwwGdgobVQrN576yRF-gzGzoHsz","app_key":"wyh5DTTiu0iG1HQy08ybwSoc","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -389,7 +389,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>YOLOv5学习(一)｜部署YOLOv5模型</div>
-      <div>http://syxcoder.github.io/2022/10/26/YOLOv5学习-1/</div>
+      <div>http://syxcoder.blog/2022/10/26/YOLOv5学习-1/</div>
     </div>
     <div class="license-meta">
       
